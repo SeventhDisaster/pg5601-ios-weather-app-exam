@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+// MARK: - Next1_HoursDetails
+struct Next1_HoursDetails: Codable {
+    let precipitationAmount: Float
+
+    enum CodingKeys: String, CodingKey {
+        case precipitationAmount = "precipitation_amount"
+    }
+}

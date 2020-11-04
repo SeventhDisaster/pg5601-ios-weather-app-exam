@@ -6,3 +6,14 @@
 //
 
 import Foundation
+
+// MARK: - Meta
+struct Meta: Codable {
+    let updatedAt: Date
+    let units: Units
+
+    enum CodingKeys: String, CodingKey {
+        case updatedAt = "updated_at"
+        case units
+    }
+}

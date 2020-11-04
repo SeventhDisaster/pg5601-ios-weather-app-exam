@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+// MARK: - Geometry
+struct Geometry: Codable {
+    let type: String
+    let coordinates: [Double]
+}

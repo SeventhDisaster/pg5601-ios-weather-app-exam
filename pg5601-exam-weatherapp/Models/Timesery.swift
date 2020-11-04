@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+// MARK: - Timesery
+struct Timesery: Codable {
+    let time: Date
+    let data: DataClass
+}

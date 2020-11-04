@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+// MARK: - Properties
+struct Properties: Codable {
+    let meta: Meta
+    let timeseries: [Timesery]
+}

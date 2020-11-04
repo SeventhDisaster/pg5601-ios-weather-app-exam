@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+// MARK: - ForecastData
+struct ForecastData: Decodable {
+    let type: String
+    let geometry: Geometry
+    let properties: Properties
+}

@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+// MARK: - NextHours
+struct NextHours: Codable {
+    let summary: Summary
+    let details: Next1_HoursDetails
+}

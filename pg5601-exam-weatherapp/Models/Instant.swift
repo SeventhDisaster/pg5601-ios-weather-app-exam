@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+// MARK: - Instant
+struct Instant: Codable {
+    let details: InstantDetails
+}

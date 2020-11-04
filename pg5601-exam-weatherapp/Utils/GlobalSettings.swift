@@ -6,3 +6,5 @@
 //
 
 import Foundation
+
+public var userLocation : (lat: Double, lon: Double)? = nil

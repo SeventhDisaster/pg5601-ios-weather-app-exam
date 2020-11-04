@@ -9,6 +9,11 @@ import UIKit
 
 class ForecastTableViewCell: UITableViewCell {
 
+    @IBOutlet var title : UILabel!;
+    @IBOutlet var descriptor : UILabel!;
+    @IBOutlet var possibleValue : UILabel!;
+    @IBOutlet var unitValue : UILabel!;
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
