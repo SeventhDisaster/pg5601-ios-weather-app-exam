@@ -9,14 +9,20 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class MapViewController: UIViewController, CLLocationManagerDelegate {
+class MapViewController: UIViewController, CLLocationManagerDelegate{
 
+    // Outlets and Actions
+    @IBOutlet var modeSwitch : UISwitch!
+    @IBOutlet var modeLabel : UILabel!
+    
     @IBOutlet var mapView : MKMapView!
     var mapAnnotation = MKPointAnnotation()
     
-    @IBAction func placePinPress(sender: UILongPressGestureRecognizer) {
-        sender.minimumPressDuration = 0.5 //Hold for at least .7 s
-        if sender.state == .began {
+    @IBOutlet var weatherView : UIView!
+    
+    var tapGestureRecognizer : UITapGestureRecognizer!
+    @IBAction func placePinPress(sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
             let point = sender.location(in: self.mapView)
             let latlon = self.mapView.convert(point, toCoordinateFrom: self.mapView)
             print(latlon)
@@ -27,26 +33,61 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    @IBAction func modeChange(sender : UISwitch) {
+        if sender.isOn {
+            renderPinMode()
+        } else {
+            renderTrackMode()
+        }
+    }
+    
+    
     var locationManager: CLLocationManager?
     
-
-        
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.title = "Map"
         
+        // False = Track, True = Pin
+        modeSwitch.isOn = false
+        
         locationManager = CLLocationManager()
         locationManager?.delegate = self
         locationManager?.requestWhenInUseAuthorization()
+        locationManager?.requestLocation() //Get Initial location
         
-        locationManager?.requestLocation()
+        tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(placePinPress))
+        mapView.addGestureRecognizer(tapGestureRecognizer)
         
-        mapView.showsUserLocation = true
+        modeSwitch.addTarget(self, action: #selector(modeChange), for: UIControl.Event.valueChanged)
+        modeChange(sender: modeSwitch); //Set default
+
+    }
+    
+    // When the toggle is ON will display weather based on where the pin is
+    func renderPinMode() {
+        modeLabel.text = "Pin Mode"
+        mapView.showsUserLocation = false;
+        mapView.addGestureRecognizer(tapGestureRecognizer)
+        
+        locationManager?.requestLocation();
+        mapAnnotation.coordinate = (locationManager?.location?.coordinate)!
+        mapView.addAnnotation(mapAnnotation)
+    }
+    
+    // When the toggle is OFF will show the regular view where the user location is shown and tracked
+    func renderTrackMode() {
+        modeLabel.text = "Follow Mode"
+        
+        // Handle changes to map view
+        mapView.removeGestureRecognizer(tapGestureRecognizer)
+        mapView.showsUserLocation = true;
+        mapView.removeAnnotation(mapAnnotation)
         mapView.setUserTrackingMode(MKUserTrackingMode.follow, animated: true)
         
-        let holdGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(placePinPress))
-        mapView.addGestureRecognizer(holdGestureRecognizer)
+        
+        locationManager?.requestLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
