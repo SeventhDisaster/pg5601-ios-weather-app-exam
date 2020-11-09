@@ -2,7 +2,7 @@
 //  pg5601_exam_weatherappUITests.swift
 //  pg5601-exam-weatherappUITests
 //
-//  Created by Krister Emanuelsen on 26/10/2020.
+//  Created by Candidate 10061 on 26/10/2020.
 //
 
 import XCTest

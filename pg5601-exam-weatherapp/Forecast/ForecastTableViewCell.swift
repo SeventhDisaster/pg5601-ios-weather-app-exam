@@ -2,7 +2,7 @@
 //  ForecastTableViewCell.swift
 //  pg5601-exam-weatherapp
 //
-//  Created by Krister Emanuelsen on 26/10/2020.
+//  Created by Candidate 10061 on 26/10/2020.
 //
 
 import UIKit

@@ -2,7 +2,7 @@
 //  LandingViewController.swift
 //  pg5601-exam-weatherapp
 //
-//  Created by Krister Emanuelsen on 08/11/2020.
+//  Created by Candidate 10061 on 08/11/2020.
 //
 
 import UIKit

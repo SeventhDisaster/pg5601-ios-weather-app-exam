@@ -2,7 +2,7 @@
 //  SimpleViewFilter.swift
 //  pg5601-exam-weatherapp
 //
-//  Created by Krister Emanuelsen on 07/11/2020.
+//  Created by Candidate 10061 on 07/11/2020.
 //
 
 import Foundation
