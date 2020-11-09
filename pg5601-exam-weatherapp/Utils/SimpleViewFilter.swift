@@ -7,7 +7,7 @@
 
 import Foundation
 
-private let earliestTimeInDay = 4 //Changes what time of the day is selected during the filtering process
+private let earliestTimeInDay = 6 //Changes what time of the day is selected during the filtering process
 
 // This function will run through the result from an API call and parse out the 7 next days of weather report
 func parseForecastToSimpleWeekData(data: Properties) -> [SimpleWeatherData] {

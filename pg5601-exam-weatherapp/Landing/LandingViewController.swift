@@ -178,10 +178,8 @@ class LandingViewController: UIViewController, CLLocationManagerDelegate {
         }
         
         
-        //Any precipitation (Any rain)
-        
-        if weekList[onIndex].nextHours.summary.symbolCode == SymbolCode.partlycloudyNight {
-        //if weekList[onIndex].nextHours.details.precipitationAmount > 0 {
+        //Any precipitation causes the rain animation to appear (Any rain)
+        if weekList[onIndex].nextHours.details.precipitationAmount > 0 {
             self.view.addSubview(rainDropA)
             rainDropA.transform = .init(translationX: 70, y: 0)
             self.view.addSubview(rainDropB)

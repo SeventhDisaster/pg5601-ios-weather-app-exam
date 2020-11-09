@@ -18,8 +18,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
     @IBOutlet var mapView : MKMapView!
     var mapAnnotation = MKPointAnnotation()
     
-    @IBOutlet var weatherView : UIView!
-    
+    var timesery: Timesery?
     var tapGestureRecognizer : UITapGestureRecognizer!
     @IBAction func placePinPress(sender: UITapGestureRecognizer) {
         if sender.state == .ended {
@@ -29,6 +28,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
             
             mapAnnotation.coordinate = latlon
             
+            //mapWeather here is a global variable, it's delegate is set in MapWeatherController.swift
+            mapWeather.fetchWeatherAt(lat: latlon.latitude, lon: latlon.longitude)
             self.mapView.addAnnotation(mapAnnotation)
         }
     }
@@ -95,6 +96,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
             lat: Double(String(format: "%.4f", locations[0].coordinate.latitude))!,
             lon: Double(String(format: "%.4f", locations[0].coordinate.longitude))!
         )
+        
+        //mapWeather here is a global variable, it's delegate is set in MapWeatherController.swift
+        mapWeather.fetchWeatherAt(lat: locations[0].coordinate.latitude, lon: locations[0].coordinate.longitude)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

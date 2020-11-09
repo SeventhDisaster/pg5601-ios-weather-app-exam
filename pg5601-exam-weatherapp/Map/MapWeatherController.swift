@@ -8,25 +8,30 @@
 import UIKit
 import CoreLocation
 
-protocol MapWeatherDelegate {
-    func getWeatherOnLocation(coordinate : CLLocationCoordinate2D) -> Timesery
-}
-
-class MapWeatherController: UIViewController {
-    
-    //weak var delegate: MapWeatherDelegate?
+class MapWeatherController: UIViewController, MapWeatherDelegate {
 
     @IBOutlet var weatherIcon : UIImageView!
+    @IBOutlet var latitude : UILabel!
+    @IBOutlet var longitude : UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
-        // Do any additional setup after loading the view.
+        mapWeather.delegate = self
     }
     
-    func didGetWeather() {
-        //delegate?.did
+    func didFetchWeatherData(_ weather: ForecastData?) {
+        if weather == nil {
+            self.latitude.text = "Failed to recieve"
+            self.longitude.text = "Network Call Failed"
+            self.weatherIcon.image = UIImage.init(named: "unknown")
+            return
+        }
+        
+        let coordinateArray = weather!.geometry.coordinates
+        self.latitude.text = String(coordinateArray[0])
+        self.longitude.text = String(coordinateArray[1])
+        self.weatherIcon.image = UIImage(named: weather!.properties.timeseries[0].data.next1_Hours?.summary.symbolCode.rawValue ?? "unknown")
     }
 }
 

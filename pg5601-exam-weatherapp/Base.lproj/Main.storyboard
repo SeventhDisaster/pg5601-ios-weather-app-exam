@@ -252,6 +252,7 @@
         <!--Map View Controller-->
         <scene sceneID="Pyh-09-x3H">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fyz-7t-XpT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="Nw4-ow-Le9" customClass="MapViewController" customModule="pg5601_exam_weatherapp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AAQ-nt-ozv">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -302,10 +303,8 @@
                         <outlet property="mapView" destination="snJ-fY-VxX" id="K5o-Pe-YM9"/>
                         <outlet property="modeLabel" destination="tLe-hM-xgz" id="5ik-4x-j3N"/>
                         <outlet property="modeSwitch" destination="0Ta-as-8dr" id="dgM-9x-hNW"/>
-                        <outlet property="weatherView" destination="na7-eJ-DRU" id="nDq-Jd-nDL"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fyz-7t-XpT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="481" y="-781"/>
         </scene>
@@ -365,6 +364,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="latitude" destination="idl-ZN-7IC" id="ehf-FF-6n1"/>
+                        <outlet property="longitude" destination="oKt-CW-sWF" id="6mc-7K-E41"/>
                         <outlet property="weatherIcon" destination="XZF-Zg-dtX" id="Mbs-Cl-nbE"/>
                     </connections>
                 </viewController>
