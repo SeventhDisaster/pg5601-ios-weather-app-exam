@@ -69,6 +69,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hXZ-wI-mVT">
+                                <rect key="frame" x="16" y="93" width="382" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
+                                <color key="highlightedColor" systemColor="systemRedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Umbrella" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hgi-ur-mcS">
                                 <rect key="frame" x="16" y="402" width="382" height="100"/>
                                 <constraints>
@@ -88,6 +94,9 @@
                             <constraint firstItem="Cje-2u-toU" firstAttribute="centerX" secondItem="MbR-wp-K7v" secondAttribute="centerX" id="AJV-ga-0Tp"/>
                             <constraint firstItem="duf-Cf-PWU" firstAttribute="centerX" secondItem="MbR-wp-K7v" secondAttribute="centerX" id="EbL-W4-m9Y"/>
                             <constraint firstItem="MbR-wp-K7v" firstAttribute="bottom" secondItem="eWD-PM-wix" secondAttribute="bottom" constant="16" id="QRD-ab-W4u"/>
+                            <constraint firstItem="hXZ-wI-mVT" firstAttribute="leading" secondItem="MbR-wp-K7v" secondAttribute="leading" constant="16" id="TDj-Aa-4Vs"/>
+                            <constraint firstItem="MbR-wp-K7v" firstAttribute="trailing" secondItem="hXZ-wI-mVT" secondAttribute="trailing" constant="16" id="XNp-WI-fzl"/>
+                            <constraint firstItem="hXZ-wI-mVT" firstAttribute="top" secondItem="MbR-wp-K7v" secondAttribute="top" constant="5" id="caI-pD-hCX"/>
                             <constraint firstItem="hgi-ur-mcS" firstAttribute="leading" secondItem="MbR-wp-K7v" secondAttribute="leading" constant="16" id="ivs-gS-ji6"/>
                             <constraint firstItem="MbR-wp-K7v" firstAttribute="trailing" secondItem="eWD-PM-wix" secondAttribute="trailing" constant="16" id="kfT-cb-dRV"/>
                             <constraint firstItem="hgi-ur-mcS" firstAttribute="top" secondItem="Cje-2u-toU" secondAttribute="bottom" constant="10" id="pcB-IE-Mhs"/>
@@ -97,6 +106,7 @@
                     <navigationItem key="navigationItem" id="bxb-Ex-89R"/>
                     <connections>
                         <outlet property="day" destination="duf-Cf-PWU" id="pyh-hC-yXs"/>
+                        <outlet property="errorLabel" destination="hXZ-wI-mVT" id="E1z-FB-VBC"/>
                         <outlet property="swipeView" destination="iE0-4e-ycW" id="up9-xg-9fL"/>
                         <outlet property="umbrella" destination="hgi-ur-mcS" id="eAi-Yx-Xb5"/>
                         <outlet property="updateTime" destination="eWD-PM-wix" id="mDT-TE-unc"/>
@@ -205,7 +215,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="zp5-cF-dU5">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="0qQ-fa-b9W" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="0qQ-fa-b9W" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zoQ-dS-XlW">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -369,6 +379,9 @@
         </systemColor>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

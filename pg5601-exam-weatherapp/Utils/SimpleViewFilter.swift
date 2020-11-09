@@ -7,6 +7,8 @@
 
 import Foundation
 
+private let earliestTimeInDay = 4 //Changes what time of the day is selected during the filtering process
+
 // This function will run through the result from an API call and parse out the 7 next days of weather report
 func parseForecastToSimpleWeekData(data: Properties) -> [SimpleWeatherData] {
     var list : [SimpleWeatherData] = []
@@ -27,7 +29,8 @@ func parseForecastToSimpleWeekData(data: Properties) -> [SimpleWeatherData] {
 
 func timeStringToReadable(timeString: Date) -> String {
     let dateFormatter = DateFormatter()
-    dateFormatter.dateStyle = .long
+    dateFormatter.timeStyle = .long
+    dateFormatter.dateStyle = .short
     return dateFormatter.string(from: timeString)
 }
 
@@ -38,19 +41,19 @@ func filterOutDays(timeseries: [Timesery]) -> [Timesery] {
     var selections : [Timesery] = []
     var usedDates : [Int] = [] //This is used to avoid going through the same day
     for sery in timeseries {
-        //print(sery.time)
         if(!isDateInList(date: sery.time, list: usedDates)) {
             selections.append(sery)
             usedDates.append(Calendar.current.component(.day, from: sery.time))
         }
-        
     }
+
     while selections.count > 7 {
         selections.removeLast() //Cut it down to the 7 first entries
     }
     return selections;
 }
 
+// Helper function to cut down the array to one timer per day after a certain point per day
 func isDateInList(date : Date, list : [Int]) -> Bool {
     let day = Calendar.current.component(.day, from: date)
     
@@ -60,7 +63,8 @@ func isDateInList(date : Date, list : [Int]) -> Bool {
             return true // Ensure only one day is selected from the array
         }
     }
-    if Calendar.current.component(.hour, from: date) < 6 {
+    
+    if Calendar.current.component(.hour, from: date) < earliestTimeInDay {
         return true //Wait until at least 8AM before selecting a time
     }
     return false
