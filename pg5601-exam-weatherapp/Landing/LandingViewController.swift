@@ -37,6 +37,10 @@ class LandingViewController: UIViewController, CLLocationManagerDelegate {
     @IBAction func performAnimation(sender: UITapGestureRecognizer) {
         print("Tapped")
         if sender.state == .ended {
+            
+            //Because the rotation mechanism is too smart to perform an easy full 360 rotation, this animation chain handles that.
+            //The animation will always try to reach its intended destination using the shortest route possible
+            //for this reason I can only perform a 180 degree rotation at most at a time, otherwise it will simply go the other way.
             if weatherIconTimesClicked < 1 {
                 UIView.animate(withDuration: 1.5, delay: 0, options: [.curveEaseIn], animations: {
                     self.weatherIcon.transform = .init(rotationAngle: .pi)
@@ -44,9 +48,18 @@ class LandingViewController: UIViewController, CLLocationManagerDelegate {
                     //Becuase the first animation only completes half the animation, the second half must be run here
                     UIView.animate(withDuration: 1.5, delay: 0, options: [.curveEaseOut], animations: {
                         self.weatherIcon.transform = .init(rotationAngle: .pi * 2)
-                    }, completion: nil)
-                    self.weatherIcon.transform = CGAffineTransform(rotationAngle: 0) //Reset to original
-                    self.weatherIconTimesClicked += 1
+                    }, completion:{ _ in
+                        UIView.animate(withDuration: 1.5, delay: 0, options: [.curveEaseIn], animations: {
+                            self.weatherIcon.transform = .init(rotationAngle: -.pi)
+                        }, completion:{ _ in
+                            UIView.animate(withDuration: 1.5, delay: 0, options: [.curveEaseOut], animations: {
+                                self.weatherIcon.transform = .init(rotationAngle: -(.pi * 2) + 0.001) //Needs to be very specific to not be wonky
+                            }, completion:{ _ in
+                                self.weatherIcon.transform = CGAffineTransform(rotationAngle: 0) //Reset to original
+                                self.weatherIconTimesClicked += 1
+                            })
+                        })
+                    })
                 })
             } else {
                 UIView.animate(withDuration: 3, delay: 0, options: [.autoreverse, .curveEaseInOut], animations: {
@@ -170,7 +183,6 @@ class LandingViewController: UIViewController, CLLocationManagerDelegate {
                 self.view.backgroundColor =  UIColor.init(red: 1, green: 1, blue: 0.8, alpha: 1)
             }, completion: nil)
         } else {
-            print("Should stop")
             UIView.animateKeyframes(withDuration: 0, delay: 0, options: [.calculationModeLinear, .allowUserInteraction], animations: {
                 self.weatherIcon.transform = .init(rotationAngle: 0)
                 self.view.backgroundColor = .white

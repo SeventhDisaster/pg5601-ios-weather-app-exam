@@ -12,7 +12,7 @@ private let earliestTimeInDay = 6 //Changes what time of the day is selected dur
 // This function will run through the result from an API call and parse out the 7 next days of weather report
 func parseForecastToSimpleWeekData(data: Properties) -> [SimpleWeatherData] {
     var list : [SimpleWeatherData] = []
-    let updateDateTime = timeStringToReadable(timeString: data.meta.updatedAt) // Time the data was updated
+    let updateDateTime = timeStringToReadable(timeString: Date()) // Time the data was updated
     
     //Sets up the 7 day 6AM list
     for day in filterOutDays(timeseries: data.timeseries){
